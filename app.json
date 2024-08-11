@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "repaso_frontend",
-    "slug": "repaso_frontend",
+    "name": "app_movil_asistencia",
+    "slug": "app_movil_asistencia",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
