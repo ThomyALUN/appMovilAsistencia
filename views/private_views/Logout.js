@@ -7,11 +7,11 @@ import { AuthServices } from '../../services/AuthServices';
 
 export default function Logout() {
 
-    const { logoutContext } = useContext(AuthContext);
+    const { logoutContext, userToken } = useContext(AuthContext);
 
     const handleLogout = async () => {
-        await AuthServices.logout(logoutContext);
-        Alert.alert('Logout', 'Sesión cerrada correctamente');
+        await AuthServices.logout(logoutContext, userToken);
+        Alert.alert('Cierre de sesión', 'Sesión cerrada correctamente');
     };
 
     return (

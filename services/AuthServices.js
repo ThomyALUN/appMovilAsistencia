@@ -1,9 +1,10 @@
 import axios from "axios";
+import { env } from "../constants/env";
 import { Alert } from "react-native";
 
 const login = async (email, password, loginContext) => { 
     try {
-        const response = await axios.post('http://192.168.1.2:8000/api/login', {
+        const response = await axios.post(`${env.API_URL}/api/login`, {
             email: email,
             password: password,
         });
@@ -18,19 +19,21 @@ const login = async (email, password, loginContext) => {
     }
 };
 
-const logout = async (logoutContext) => {
-    logoutContext();
+const logout = async (logoutContext, userToken) => {
     try {
-        await axios.post('http://192.168.1.2:8000/api/logout',{
+        const response = await axios.post(`${env.API_URL}/api/logout`, null, {
             headers: {
-                Authorization: `Bearer ${userToken}`
-            }
+                Authorization: `Bearer ${userToken}`,
+            },
         });
-    }
-    catch (error) {
-        console.log(error);
+        console.log('Cierre de sesión exitoso:', response.data);
+        logoutContext();
+    } catch (error) {
+        console.log('Error al cerrar sesión');
+        console.log(error.response ? error.response.data : error.message);
     }
 };
+
 
 export const AuthServices = {
     login, logout
